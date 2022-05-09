@@ -20,16 +20,24 @@ export default function Home() {
   const [serTag, setSerTag] = useState("");
   const [serTagError, setSerTagError] = useState(false);
   const [serTagLength, setSerTagLength] = useState(false);
+  const [serTagErrorMessage, setSerTagErrorMessage] = useState(false);
 
   const checkSerTag = async (e) => {
     // first set state, regardless of whether it's valid or not
     const LoweredSerTag = e.target.value.toLowerCase();
     setSerTag(LoweredSerTag);
 
+    if (LoweredSerTag.includes(".")) {
+      setSerTagError(true);
+      setSerTagErrorMessage("SerTag cannot contain a '.' character");
+      return;
+    }
+
     // if the sertag is empty, don't bother querying, just set the error to true
     if (LoweredSerTag.length < 1) {
-      setSerTagLength(true);
+      setSerTagErrorMessage("SerTag cannot be empty");
       setSerTagError(true);
+
       return;
     }
 
@@ -41,13 +49,13 @@ export default function Home() {
 
     // if it exists, set the error to true
     if (data.length > 0 || error) {
-      setSerTagLength(false);
+      setSerTagErrorMessage("SerTag already exists");
       setSerTagError(true);
       return;
     }
     // if no errors, keep at false
     setSerTagError(false);
-    setSerTagLength(false);
+    setSerTagErrorMessage("");
   };
 
   const signUpWithGoogle = async () => {
@@ -138,9 +146,7 @@ export default function Home() {
                 textColor="red.300"
                 fontSize="sm"
               >
-                {serTagLength
-                  ? "Must input a SerTag"
-                  : "Sorry! SerTag is already taken"}
+                {serTagErrorMessage}
               </Text>
             </VStack>
 

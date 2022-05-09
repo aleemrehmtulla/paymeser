@@ -34,12 +34,28 @@ function Component() {
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
   const router = useRouter();
   const [notFound, setNotFound] = useState(false);
+  const [ens, setENS] = useState(false);
+  const [user, setUserData] = useState({});
+  const provider = new WalletConnectProvider({
+    infuraId: "2d8110a2cee347a0b1056ce46d7387b1", // Required
+  });
+  const web3 = new Web3(provider);
 
   const serTag = router.query.user;
 
-  const [user, setUserData] = useState({});
   const getUser = async () => {
     if (serTag) {
+      if (serTag.includes(".eth")) {
+        const tagENS = await web3.eth.ens.getOwner(serTag);
+        setENS(tagENS);
+        setUserData({
+          address: tagENS,
+          displayName: serTag,
+          description:
+            "No account! You can still send, and create a tx to their ENS :)",
+        });
+        return;
+      }
       const { data, error } = await supabase
         .from("paymeser")
         .select("userData")
@@ -47,9 +63,7 @@ function Component() {
       if (error || data.length === 0) {
         setNotFound(true);
       }
-      console.log(data, error);
       const done = await data[0]?.userData;
-      console.log(done);
       setUserData(done);
     }
   };
@@ -89,7 +103,6 @@ function Component() {
       displayValue.includes(".") &&
       displayValue.substring(displayValue.indexOf(".") + 1).length >= 2
     ) {
-      console.log("here");
       return;
     }
 
@@ -150,7 +163,6 @@ function Component() {
           ],
         });
         // Handle the result
-        console.log(transactionHash);
       } catch (error) {
         console.error(error);
       }
@@ -237,7 +249,10 @@ function Component() {
     getGasHandler();
   }, []);
 
-  if (notFound) {
+  if (
+    (notFound && !ens) ||
+    ens === "0x0000000000000000000000000000000000000000"
+  ) {
     return (
       <VStack pt={40} h="100vh">
         <Image
@@ -245,7 +260,9 @@ function Component() {
           src="https://i.giphy.com/media/3o72F8t9TDi2xVnxOE/giphy.webp"
         />
         <Heading align="center" w={{ md: "40rem" }}>
-          Damn homie! This user doesn&apos;t exist :/
+          {ens === "0x0000000000000000000000000000000000000000"
+            ? "Damn homie! ENS returned as a null address"
+            : "Damn homie! No account found :("}
         </Heading>
         <Text align="center">
           {" "}
