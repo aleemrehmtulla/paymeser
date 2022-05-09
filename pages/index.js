@@ -189,9 +189,21 @@ export default function Home() {
         pr={4}
         justify="right"
       >
-        <CustomIcon name="FaGithub" />
+        <Box
+          cursor="pointer"
+          onClick={() =>
+            window.open("https://github.com/aleemrehmtulla/paymeser")
+          }
+        >
+          <CustomIcon name="FaGithub" />
+        </Box>
         <Box w={3} />
-        <CustomIcon name="FaTwitter" />
+        <Box
+          cursor="pointer"
+          onClick={() => window.open("https://twitter.com/aleemrehmtulla")}
+        >
+          <CustomIcon name="FaTwitter" />
+        </Box>
       </Flex>
     </Box>
   );
