@@ -28,9 +28,6 @@ function Edit() {
   const [notLoggedIn, setNotLoggedIn] = useState(false);
 
   const getUser = async () => {
-    setTimeout(() => {
-      setNotLoggedIn(true);
-    }, 1000);
     const user = supabase.auth.user();
 
     if (user) {
@@ -41,6 +38,9 @@ function Edit() {
         getUser();
       }, 50);
     }
+    setTimeout(() => {
+      setNotLoggedIn(true);
+    }, 1000);
   };
 
   const handleGetUser = async (user) => {
