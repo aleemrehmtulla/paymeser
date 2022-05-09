@@ -14,3 +14,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  font-size: small;
+  border-radius: 1rem;
+  display: inline-block;
+  padding: 2px 4px;
+  cursor: pointer;
+}
