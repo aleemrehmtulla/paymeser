@@ -168,7 +168,7 @@ function Edit() {
           Severly Under Optimized For Mobile!
         </Text>
       </Box>
-      <Center h={{ base: "80vh", md: "100vh" }}>
+      <Center h={{ base: "70vh", md: "100vh" }}>
         <Box display="flex" h={{ base: "fit", md: "1/2" }} align="center">
           <Box
             mt={{ base: "-12", md: 0 }}
@@ -231,7 +231,7 @@ function Edit() {
                 window.open(`https://paymeser.vercel.app/${userData?.serTag}`)
               }
             >
-              <Text textColor="blue.500" pt={8}>
+              <Text textAlign="center" textColor="blue.500" pt={8}>
                 paymeser.vercel.app/{userData?.serTag}
               </Text>
             </Box>
