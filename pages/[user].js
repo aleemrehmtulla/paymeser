@@ -36,6 +36,7 @@ function Component() {
   const [notFound, setNotFound] = useState(false);
   const [ens, setENS] = useState(false);
   const [user, setUserData] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const provider = new WalletConnectProvider({
     infuraId: "2d8110a2cee347a0b1056ce46d7387b1", // Required
   });
@@ -47,6 +48,9 @@ function Component() {
     if (serTag) {
       if (serTag.includes(".eth")) {
         const tagENS = await web3.eth.ens.getOwner(serTag);
+        if (tagENS === "0x0000000000000000000000000000000000000000") {
+          setErrorMessage("Damn homie! The ENS returned as a null address.");
+        }
         setENS(tagENS);
         setUserData({
           address: tagENS,
@@ -56,12 +60,28 @@ function Component() {
         });
         return;
       }
+      if (serTag.includes("0x")) {
+        if (!ethers.utils.isAddress(serTag)) {
+          setErrorMessage("Damn homie! The address is invalid");
+          return;
+        }
+        setENS(serTag);
+        setUserData({
+          address: serTag,
+          displayName: `${serTag.substring(0, 5)}...${serTag.substring(5, 9)}`,
+          description:
+            "No account! You can still send, and create a tx to their address :)",
+        });
+
+        return;
+      }
       const { data, error } = await supabase
         .from("paymeser")
         .select("userData")
         .eq("serTag", serTag);
       if (error || data.length === 0) {
         setNotFound(true);
+        setErrorMessage("Damn homie! The user does not exist.");
       }
       const done = await data[0]?.userData;
       setUserData(done);
@@ -259,10 +279,7 @@ function Component() {
     }
   }, [router]);
 
-  if (
-    (notFound && !ens) ||
-    ens === "0x0000000000000000000000000000000000000000"
-  ) {
+  if ((notFound && !ens) || errorMessage !== "") {
     return (
       <VStack pt={40} h="100vh">
         <Image
@@ -270,9 +287,7 @@ function Component() {
           src="https://i.giphy.com/media/3o72F8t9TDi2xVnxOE/giphy.webp"
         />
         <Heading align="center" w={{ md: "40rem" }}>
-          {ens === "0x0000000000000000000000000000000000000000"
-            ? "Damn homie! ENS returned as a null address"
-            : "Damn homie! No account found :("}
+          {errorMessage}
         </Heading>
         <Text align="center">
           {" "}
