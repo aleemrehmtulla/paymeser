@@ -328,7 +328,7 @@ function Component() {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <VStack pt={20}>
+      <VStack pt={{ base: 12, md: 20 }}>
         <VStack spacing={0}>
           <Box boxSize={40}>
             <Avatar size="full" rounded="full" src={user?.pfp} alt="logo" />
