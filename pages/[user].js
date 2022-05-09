@@ -111,10 +111,12 @@ function Component() {
   const currencySelectionHandler = () => {
     if (currency === "ETH") {
       setCurrency("USD");
+      currencyChangeHandler();
       setCurrencyIcon("FaDollarSign");
     }
     if (currency === "USD") {
       setCurrency("ETH");
+      currencyChangeHandler();
       setCurrencyIcon("FaEthereum");
     }
   };
@@ -242,12 +244,20 @@ function Component() {
   };
 
   useEffect(() => {
-    currencyChangeHandler();
-  }, [currency]);
-
-  useEffect(() => {
     getGasHandler();
   }, []);
+  useEffect(() => {
+    if (router.query.USD) {
+      setCurrency("USD");
+      setCurrencyIcon("FaDollarSign");
+      setDisplayValue(router.query.USD);
+    }
+    if (router.query.ETH) {
+      setCurrency("ETH");
+      setCurrencyIcon("FaEthereum");
+      setDisplayValue(router.query.ETH);
+    }
+  }, [router]);
 
   if (
     (notFound && !ens) ||
