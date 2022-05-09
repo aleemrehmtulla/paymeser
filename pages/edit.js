@@ -38,9 +38,6 @@ function Edit() {
         getUser();
       }, 50);
     }
-    setTimeout(() => {
-      setNotLoggedIn(true);
-    }, 1000);
   };
 
   const handleGetUser = async (user) => {
