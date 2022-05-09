@@ -63,7 +63,7 @@ export default function Home() {
     }
 
     // signin
-    const { user, session, error } = await supabase.auth.signIn(
+    await supabase.auth.signIn(
       {
         provider: "google",
       },
@@ -73,8 +73,7 @@ export default function Home() {
     );
   };
   const signInWithGoogle = async () => {
-    // signin
-    const { user, session, error } = await supabase.auth.signIn(
+    await supabase.auth.signIn(
       {
         provider: "google",
       },
@@ -92,10 +91,8 @@ export default function Home() {
   return (
     <Box>
       <Center display={{ base: "block", md: "flex" }} h="100vh" px={8}>
-        {/* <Box bg="blue" display={{ base: '', md: 'flex' }} align="center"> */}
         <VStack pt={{ base: 12, md: 0 }} align="center">
           <Heading fontSize={{ base: "2xl", md: "6xl" }}>
-            {" "}
             Ser, Ser. Pay Me!
           </Heading>
           <Text
@@ -107,7 +104,7 @@ export default function Home() {
           >
             paymeser is an easy way to receive ETH from friends. just send them
             your SerLink, and they can input an amount + create tx, w/o
-            memorizing your address.
+            memorizing your address
           </Text>
           <Box spacing={0}>
             <VStack h="14" pb={2} align="start" spacing={0}>
@@ -183,9 +180,8 @@ export default function Home() {
           </Box>
         </VStack>
         <Box align="center" px={{ base: 2, sm: 4, md: 8 }}>
-          <Image src="img/login/phone.png" alt="" />
+          <Image src="/img/phone.png" alt="" />
         </Box>
-        {/* </Box> */}
       </Center>
       <Flex
         display={{ base: "none", md: "flex" }}
@@ -205,7 +201,7 @@ const CustomIcon = ({ name }) => {
   const IconComponent = Icons[name];
 
   if (!IconComponent) {
-    // Return a default one
+    // Return null if the icon wasn't passed
     return;
   }
 

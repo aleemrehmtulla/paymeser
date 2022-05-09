@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "../../utils/supabaseClient";
+
 import {
   Box,
   Center,
@@ -11,8 +14,6 @@ import {
   AlertDescription,
   Link,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { supabase } from "../../utils/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
@@ -22,7 +23,6 @@ export default function Home() {
     const user = supabase.auth.user();
     if (user) {
       makeUser(user);
-      console.log(user);
     } else {
       setTimeout(() => {
         getUser();
@@ -31,8 +31,6 @@ export default function Home() {
   };
 
   async function makeUser(user) {
-    console.log("function invoked");
-
     if (router.query.tag) {
       const { data, error } = await supabase
         .from("paymeser")
@@ -40,7 +38,6 @@ export default function Home() {
         .eq("serTag", router.query.tag);
 
       if (data.length === 0 || error) {
-        console.log("found");
         const { data, error } = await supabase
           .from("paymeser")
           .update({ serTag: router.query.tag })
@@ -58,19 +55,11 @@ export default function Home() {
 
         router.push("/edit");
 
-        console.log(data);
-        console.log(error);
-        console.log(dataa);
-        console.log(errorr);
-
         return;
       }
       if (data[0]?.userData) {
-        console.log("userData exists");
         setStatus("exists");
       }
-    } else {
-      console.log("no tag");
     }
   }
 
@@ -97,7 +86,7 @@ export default function Home() {
           textAlign="center"
           height="100vh"
         >
-          <AlertIcon boxSize="40px" mr={0} />
+          <AlertIcon boxSize="40px" />
           <AlertTitle mt={4} mb={1} fontSize="lg">
             User Already Exists
           </AlertTitle>

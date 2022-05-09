@@ -18,7 +18,6 @@ import {
   Avatar,
   Spinner,
 } from "@chakra-ui/react";
-
 import * as Icons from "react-icons/fa";
 
 function Edit() {
@@ -29,7 +28,11 @@ function Edit() {
   const [notLoggedIn, setNotLoggedIn] = useState(false);
 
   const getUser = async () => {
+    setTimeout(() => {
+      setNotLoggedIn(true);
+    }, 1000);
     const user = supabase.auth.user();
+
     if (user) {
       handleGetUser(user);
       console.log(user);
@@ -37,9 +40,6 @@ function Edit() {
       setTimeout(() => {
         getUser();
       }, 50);
-      setTimeout(() => {
-        setNotLoggedIn(true);
-      }, 1000);
     }
   };
 
@@ -143,24 +143,27 @@ function Edit() {
     );
   }
 
-  // if (notLoggedIn) {
-  //   return (
-  //     <VStack pt={40} h="100vh">
-  //       <Image alt="" src="https://i.giphy.com/media/3o72F8t9TDi2xVnxOE/giphy.webp" />
-  //       <Heading align="center" px={2} w={{ md: '40rem' }}>
-  //         Aw Shucks! Dosen&apos;t seem as though you&apos;re logged in :(
-  //       </Heading>
-  //       <Text align="center">
-  //         {' '}
-  //         Click{' '}
-  //         <Link href="http://paymeser.vercel.app" color="blue.700">
-  //           here
-  //         </Link>{' '}
-  //         to login
-  //       </Text>
-  //     </VStack>
-  //   )
-  // }
+  if (notLoggedIn) {
+    return (
+      <VStack pt={40} h="100vh">
+        <Image
+          alt=""
+          src="https://i.giphy.com/media/3o72F8t9TDi2xVnxOE/giphy.webp"
+        />
+        <Heading align="center" px={2} w={{ md: "40rem" }}>
+          Aw Shucks! Dosen&apos;t seem as though you&apos;re logged in :(
+        </Heading>
+        <Text align="center">
+          {" "}
+          Click{" "}
+          <Link href="http://paymeser.vercel.app" color="blue.700">
+            here
+          </Link>{" "}
+          to login
+        </Text>
+      </VStack>
+    );
+  }
   return (
     <Box>
       <Box display={{ base: "block", md: "none" }} py={2} w="full" bg="black">
@@ -212,7 +215,7 @@ function Edit() {
             <Input
               mt={8}
               borderColor="gray.300"
-              placeholder="ETH Address (no ENS 🙁)"
+              placeholder="ETH Addrss (no ENS 🙁)"
               value={userData?.address}
               onChange={(e) => updateAddress(e)}
             />

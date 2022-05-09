@@ -1,8 +1,14 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "../utils/supabaseClient";
+
+import { ethers } from "ethers";
+import Web3 from "web3";
+import WalletConnectProvider from "@walletconnect/ethereum-provider";
+
 import {
   Box,
-  Flex,
   Text,
-  Center,
   Button,
   Image,
   VStack,
@@ -19,20 +25,9 @@ import {
   ModalCloseButton,
   SimpleGrid,
   useDisclosure,
-  ButtonGroup,
-  IconButton,
-  AddIcon,
   Avatar,
 } from "@chakra-ui/react";
-import { ethers } from "ethers";
-
-import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/ethereum-provider";
-
-import { supabase } from "../utils/supabaseClient";
-import { useState, useEffect } from "react";
 import * as Icons from "react-icons/fa";
-import { useRouter } from "next/router";
 
 function Component() {
   const { isOpen, onOpen, onClose } = useDisclosure();
