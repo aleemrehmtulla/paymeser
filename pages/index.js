@@ -13,6 +13,7 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
+
 import * as Icons from "react-icons/fa";
 
 export default function Home() {
@@ -182,7 +183,7 @@ export default function Home() {
           </Box>
         </VStack>
         <Box align="center" px={{ base: 2, sm: 4, md: 8 }}>
-          <Image src="https://aleem.lol/img/login/phone.png" alt="" />
+          <Image src="img/login/phone.png" alt="" />
         </Box>
         {/* </Box> */}
       </Center>
