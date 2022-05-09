@@ -168,7 +168,7 @@ function Edit() {
           Severly Under Optimized For Mobile!
         </Text>
       </Box>
-      <Center h="100vh">
+      <Center h={{ base: "80vh", md: "100vh" }}>
         <Box display="flex" h={{ base: "fit", md: "1/2" }} align="center">
           <Box
             mt={{ base: "-12", md: 0 }}
