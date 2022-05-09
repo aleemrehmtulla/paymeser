@@ -140,7 +140,7 @@ function Edit() {
     );
   }
 
-  if (notLoggedIn) {
+  if (serTag === "") {
     return (
       <VStack pt={40} h="100vh">
         <Image
