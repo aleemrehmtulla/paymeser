@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ser, Ser. Pay Me 🙏
 
-## Getting Started
+## What is this?
 
-First, run the development server:
+Think cash-app link meets crypto. Why type in such a long address, when you can just let them know your SerTag! No need to go in a wallet to create a transaction. We do that for you :) 
 
-```bash
+![tweet](https://paymeser.vercel.app/img/demo.gif)
+
+## Usage 🤝
+
+1. Claim your sertag & create a profile
+2. Copy your SerLink
+3. Send it to a fren and get monies :)
+
+## Deployments 💻
+
+Vercel: https://paymeser.vercel.app
+
+## For development 🧑‍💻
+
+### Scripts
+
+npm install
+
 npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Important notes
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+This was a 1.3 day project. I know it's not perfect :-)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Undecided to work on it more- I do however beleive it *can* be a valuable tool. Imagine a query param with a non-registered eth address worked! Or you could link a social media to proove it's really your address!
 
-## Learn More
+I used ChakraUI & Supabase for this- fork it and have some fun 🍴
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Connect with me 🤗
 
-## Deploy on Vercel
+https://twitter.com/aleemrehmtulla
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+https://aleemrehmtulla.com
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://www.linkedin.com/in/aleemrehmtulla/
