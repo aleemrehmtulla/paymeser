@@ -19,6 +19,9 @@ import {
   Stack,
   HStack,
   ModalBody,
+  Icon,
+  Input,
+  Center,
   Link,
   Heading,
   ModalCloseButton,
@@ -124,26 +127,29 @@ function Component() {
     setDisplayValue(displayValue + number);
   };
   const currencySelectionHandler = () => {
+    console.log(displayValue);
+    console.log(ethPrice);
+    console.log(currency);
     if (currency === "ETH") {
+      currencyChangeHandler("ETH");
       setCurrency("USD");
-      currencyChangeHandler();
       setCurrencyIcon("FaDollarSign");
     }
     if (currency === "USD") {
+      currencyChangeHandler("USD");
       setCurrency("ETH");
-      currencyChangeHandler();
       setCurrencyIcon("FaEthereum");
     }
   };
-  const currencyChangeHandler = () => {
-    if (currency === "ETH" && displayValue !== "0") {
-      const ethValue = displayValue / ethPrice;
-      const roundedEthValue = ethValue.toFixed(5);
+  const currencyChangeHandler = (v) => {
+    if (v === "ETH" && displayValue !== "0") {
+      const ethValue = displayValue * ethPrice;
+      const roundedEthValue = ethValue.toFixed(2);
       setDisplayValue(roundedEthValue.toString());
     }
-    if (currency === "USD" && displayValue !== "0") {
-      const usdValue = displayValue * ethPrice;
-      const roundedUsd = usdValue.toFixed(2);
+    if (v === "USD" && displayValue !== "0") {
+      const usdValue = displayValue / ethPrice;
+      const roundedUsd = usdValue.toFixed(4);
       setDisplayValue(roundedUsd.toString());
     }
   };
@@ -323,65 +329,124 @@ function Component() {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <VStack pt={{ base: 12, md: 20 }}>
-        <VStack spacing={0}>
+      <HStack>
+        <VStack
+          display={{ base: "none", md: "flex" }}
+          pt={40}
+          px={8}
+          w="80%"
+          bg="black"
+          h="100vh"
+        >
           <Box boxSize={40}>
             <Avatar size="full" rounded="full" src={user?.pfp} alt="logo" />
           </Box>
-          <Text pt={2} fontSize="xl" textColor="black">
-            {user?.displayName}
-          </Text>
+          <Heading>{user?.displayName}</Heading>
           <Text
-            fontSize="md"
+            fontSize="lg"
             w={60}
             textAlign="center"
             pb={2}
-            textColor="gray.900"
+            textColor="white"
           >
             {user?.description}
           </Text>
-        </VStack>
-
-        <HStack rounded="md" spacing={0} w={48} h={8} bg="gray.100">
-          <HStack w={36} pl={2} textAlign="center" textColor="black">
-            <CustomIcon size="xs" name={currencyIcon} />
-            <Text isTruncated textAlign="center">
-              {displayValue}
+          <VStack align="left" textColor="black">
+            <Text fontSize="lg" pb={2} textColor="white">
+              This SerTag has verified :
             </Text>
-          </HStack>
-          <Spacer />
-          <Box
-            as="button"
-            px={2}
-            h="full"
-            rounded="md"
-            textColor="black"
-            _hover={{ bg: "#ebedf0" }}
-            onClick={() => currencySelectionHandler()}
-          >
-            {currency}
-          </Box>
-        </HStack>
 
-        <SimpleGrid rounded="md" p={4} spacing={2} mb={4} columns={3}>
-          {numbers.map((number) => (
-            <Button
-              onClick={() => numberChangeHandler(number)}
-              size="lg"
-              textColor="black"
-              key={number}
-              bg="gray.100"
-              _hover={{ bg: "gray.300" }}
-            >
-              {number}
+            <Button align="right" isDisabled px={30} bg="white">
+              Github (coming soon)
             </Button>
-          ))}
-        </SimpleGrid>
+            <Button disabled px={32} bg="white">
+              Twitter (coming soon)
+            </Button>
+            <Button disabled px={32} bg="white">
+              ETH Address (coming soon)
+            </Button>
+          </VStack>
+        </VStack>
+        <VStack h="100vh" w="full" align="center">
+          <Center h="full">
+            <Box>
+              <VStack display={{ base: "flex", md: "none" }} pb={2} spacing={0}>
+                <Box boxSize={40}>
+                  <Avatar
+                    size="full"
+                    rounded="full"
+                    src={user?.pfp}
+                    alt="logo"
+                  />
+                </Box>
+                <Heading pt={2} fontSize="lg" textColor="black">
+                  {user?.displayName}
+                </Heading>
+                <Text
+                  fontSize="md"
+                  w={60}
+                  textAlign="center"
+                  pb={2}
+                  textColor="black"
+                >
+                  {user?.description}
+                </Text>
+              </VStack>
+              <HStack
+                rounded="md"
+                border="1px"
+                w="fit"
+                borderColor="gray.300"
+                borderend
+              >
+                <Input
+                  textColor="black"
+                  border={0}
+                  _focus={{ border: 0 }}
+                  value={displayValue}
+                  onChange={(e) => setDisplayValue(e.target.value)}
+                />
+                <Box
+                  as="button"
+                  px={2}
+                  h="full"
+                  rounded="md"
+                  textColor="black"
+                  _hover={{ bg: "#ebedf0" }}
+                  onClick={() => currencySelectionHandler()}
+                >
+                  {currency}
+                </Box>
+              </HStack>
 
-        <Button bg="gray.100" textColor="black" onClick={sendMoneyHandler}>
-          Send Money!
-        </Button>
-      </VStack>
+              <VStack spacing={0}>
+                <SimpleGrid rounded="md" p={4} spacing={2} mb={4} columns={3}>
+                  {numbers.map((number) => (
+                    <Button
+                      onClick={() => numberChangeHandler(number)}
+                      size="lg"
+                      py={4}
+                      textColor="black"
+                      key={number}
+                      bg="gray.100"
+                      _hover={{ bg: "gray.300" }}
+                    >
+                      {number}
+                    </Button>
+                  ))}
+                </SimpleGrid>
+                <Button
+                  bg="gray.100"
+                  textColor="black"
+                  onClick={sendMoneyHandler}
+                >
+                  Send Money!
+                </Button>
+              </VStack>
+            </Box>
+          </Center>
+        </VStack>
+      </HStack>
     </Box>
   );
 }
