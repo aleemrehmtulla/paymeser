@@ -67,6 +67,7 @@ export default function Home() {
     if (!serTagLocal || serTag.length < 1) {
       setSerTagLength(true);
       setSerTagError(true);
+      setSerTagErrorMessage("SerTag cannot be empty");
       return;
     }
 
@@ -120,6 +121,7 @@ export default function Home() {
                 pl={2}
                 py={2}
                 rounded="md"
+                w="full"
                 bg="gray.100"
                 spacing={0}
                 border={serTagError ? "1px" : "1px solid red.300"}
@@ -153,8 +155,8 @@ export default function Home() {
             <Button
               mt={{ base: 2, md: 4 }}
               disabled={serTagError ? true : false}
-              _hover={{ bg: "blue.500" }}
-              bg="#025dff"
+              _hover={{ bg: "blue.800" }}
+              bg="blue.500"
               textColor="white"
               py={0}
               h={{ base: "10", md: "10" }}
