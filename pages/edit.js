@@ -20,6 +20,13 @@ import {
 } from "@chakra-ui/react";
 import * as Icons from "react-icons/fa";
 
+import WalletConnectProvider from "@walletconnect/ethereum-provider";
+import Web3 from "web3";
+const provider = new WalletConnectProvider({
+  infuraId: "2d8110a2cee347a0b1056ce46d7387b1", // Required
+});
+const web3 = new Web3(provider);
+
 function Edit() {
   const [userData, setUserData] = useState(null);
   const [serTag, setSerTag] = useState("");
@@ -101,9 +108,20 @@ function Edit() {
     setUserData(object);
   };
   const updateAddress = async (e) => {
+    const input = e.target.value;
+
+    if (input.includes(".eth")) {
+      const ensToAddress = await web3.eth.ens.getOwner(input);
+      const object = {
+        ...userData,
+        address: ensToAddress,
+      };
+      setUserData(object);
+      return;
+    }
     const object = {
       ...userData,
-      address: e.target.value,
+      address: input,
     };
     setUserData(object);
   };
