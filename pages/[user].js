@@ -370,7 +370,12 @@ function Component() {
         <VStack h="100vh" w="full" align="center">
           <Center h="full">
             <Box>
-              <VStack display={{ base: "flex", md: "none" }} pb={2} spacing={0}>
+              <VStack
+                mt="-20"
+                display={{ base: "flex", md: "none" }}
+                pb={2}
+                spacing={0}
+              >
                 <Box boxSize={40}>
                   <Avatar
                     size="full"
