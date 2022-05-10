@@ -392,14 +392,14 @@ function Component() {
                   {user?.description}
                 </Text>
               </VStack>
-              <HStack
-                rounded="md"
-                border="1px"
-                w="fit"
-                borderColor="gray.300"
-                borderend
-              >
+              <Box bg="blue"></Box>
+
+              <HStack rounded="md" border="1px" w="fit" borderColor="gray.300">
+                <Box pl={"2"}>
+                  <CustomIcon size="xs" name={currencyIcon} />
+                </Box>
                 <Input
+                  p={0}
                   textColor="black"
                   border={0}
                   _focus={{ border: 0 }}
@@ -460,5 +460,5 @@ const CustomIcon = ({ name }) => {
     return;
   }
 
-  return <IconComponent size="1rem" />;
+  return <IconComponent color="black" size="1rem" />;
 };
