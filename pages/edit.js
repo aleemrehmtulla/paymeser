@@ -230,7 +230,7 @@ function Edit() {
             <Input
               mt={8}
               borderColor="gray.300"
-              placeholder="ETH Addrss (no ENS 🙁)"
+              placeholder="ETH Address or ENS"
               value={userData?.address}
               onChange={(e) => updateAddress(e)}
             />
