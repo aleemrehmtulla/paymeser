@@ -20,12 +20,7 @@ import {
 } from "@chakra-ui/react";
 import * as Icons from "react-icons/fa";
 
-import WalletConnectProvider from "@walletconnect/ethereum-provider";
-import Web3 from "web3";
-const provider = new WalletConnectProvider({
-  infuraId: "2d8110a2cee347a0b1056ce46d7387b1", // Required
-});
-const web3 = new Web3(provider);
+import { web3 } from "../utils/web3Utils";
 
 function Edit() {
   const [userData, setUserData] = useState(null);
@@ -109,6 +104,11 @@ function Edit() {
   };
   const updateAddress = async (e) => {
     const input = e.target.value;
+    const object = {
+      ...userData,
+      address: input,
+    };
+    setUserData(object);
 
     if (input.includes(".eth")) {
       const ensToAddress = await web3.eth.ens.getOwner(input);
@@ -116,14 +116,10 @@ function Edit() {
         ...userData,
         address: ensToAddress,
       };
+      console.log(ensToAddress);
       setUserData(object);
       return;
     }
-    const object = {
-      ...userData,
-      address: input,
-    };
-    setUserData(object);
   };
   const updatePfp = async (imageLink) => {
     const object = {
@@ -171,7 +167,7 @@ function Edit() {
         <Text align="center">
           {" "}
           Click{" "}
-          <Link href="http://paymeser.vercel.app" color="blue.700">
+          <Link href={process.env.NEXT_PUBLIC_SITE_URL} color="blue.700">
             here
           </Link>{" "}
           to login
@@ -246,7 +242,9 @@ function Edit() {
             <Box
               display={{ base: "flex", md: "none" }}
               onClick={() =>
-                window.open(`https://paymeser.vercel.app/${userData?.serTag}`)
+                window.open(
+                  `${process.env.NEXT_PUBLIC_SITE_URL}/${userData?.serTag}`
+                )
               }
             >
               <Text textAlign="center" textColor="blue.500" pt={8}>
@@ -375,7 +373,7 @@ function Preview(props) {
             pr={2}
             cursor="pointer"
             onClick={() =>
-              window.open(`http://paymeser.vercel.app/${props.serTag}`)
+              window.open(`${process.env.NEXT_PUBLIC_SITE_URL}/${props.serTag}`)
             }
           >
             <CustomIcon name="FaExternalLinkAlt" />

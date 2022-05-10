@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 
 import { ethers } from "ethers";
-import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/ethereum-provider";
+import { web3 } from "../utils/web3Utils";
 
 import {
   Box,
@@ -37,10 +36,6 @@ function Component() {
   const [ens, setENS] = useState(false);
   const [user, setUserData] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const provider = new WalletConnectProvider({
-    infuraId: "2d8110a2cee347a0b1056ce46d7387b1", // Required
-  });
-  const web3 = new Web3(provider);
 
   const serTag = router.query.user;
 
@@ -292,7 +287,7 @@ function Component() {
         <Text align="center">
           {" "}
           Click{" "}
-          <Link href="http://paymeser.vercel.app" color="blue.700">
+          <Link href={process.env.NEXT_PUBLIC_SITE_URL} color="blue.700">
             here
           </Link>{" "}
           to login

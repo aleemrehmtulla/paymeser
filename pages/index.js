@@ -76,7 +76,7 @@ export default function Home() {
         provider: "google",
       },
       {
-        redirectTo: `http://paymeser.vercel.app/create?tag=${serTagLocal}&`,
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/create?tag=${serTagLocal}&`,
       }
     );
   };
@@ -86,7 +86,7 @@ export default function Home() {
         provider: "google",
       },
       {
-        redirectTo: `http://paymeser.vercel.app/edit`,
+        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/edit`,
       }
     );
   };

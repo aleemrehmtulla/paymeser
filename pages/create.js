@@ -92,7 +92,7 @@ export default function Home() {
           </AlertTitle>
           <AlertDescription maxWidth="sm">
             Please cick{" "}
-            <Link color="blue" href="https://paymeser.vercel.app">
+            <Link color="blue" href={process.env.NEXT_PUBLIC_SITE_URL}>
               here
             </Link>{" "}
             to try again
