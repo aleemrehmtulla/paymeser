@@ -331,8 +331,11 @@ function Component() {
     <Box bg="white" h="100vh" textColor="white">
       <Head>
         <title>{title}</title>
-        <meta property="og:image" content={previewImage} />
-        <meta property="og:title" content={`${serTag} | paymeser`} />
+        <meta
+          property="og:image"
+          content={`https://xbiptdtaegxdguisqxir.supabase.co/storage/v1/object/public/ogs/${router.query.user}.png`}
+        />
+        <meta property="og:title" content={` | paymeser`} />
         <meta
           property="og:description"
           content="paymeser is an easy way to receive ETH from friends. just send them your SerLink, and they can input an amount + create tx, w/o memorizing your address"
