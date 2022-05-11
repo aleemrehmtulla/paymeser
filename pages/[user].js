@@ -331,10 +331,12 @@ function Component() {
     <Box bg="white" h="100vh" textColor="white">
       <Head>
         <title>{title}</title>
-        <meta
-          property="og:image"
-          content={`https://xbiptdtaegxdguisqxir.supabase.co/storage/v1/object/public/ogs/${router.query.user}.png`}
-        />
+        {router.query.user && (
+          <meta
+            property="og:image"
+            content={`https://xbiptdtaegxdguisqxir.supabase.co/storage/v1/object/public/ogs/${router.query.user}.png`}
+          />
+        )}
         <meta property="og:title" content={` | paymeser`} />
         <meta
           property="og:description"
