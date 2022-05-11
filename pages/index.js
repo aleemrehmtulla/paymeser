@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import { supabase } from "../utils/supabaseClient";
 
 import {
@@ -99,6 +100,19 @@ export default function Home() {
 
   return (
     <Box>
+      <Head>
+        <title>Pay Me Ser</title>
+
+        <meta
+          property="og:image"
+          content="https://paymeser.vercel.app/img/preview.png"
+        />
+        <meta property="og:title" content="PayMeSer" />
+        <meta
+          property="og:description"
+          content="paymeser is an easy way to receive ETH from friends. just send them your SerLink, and they can input an amount + create tx, w/o memorizing your address"
+        />
+      </Head>
       <Center display={{ base: "block", md: "flex" }} h="100vh" px={8}>
         <VStack pt={{ base: 12, md: 0 }} align="center">
           <Heading fontSize={{ base: "2xl", md: "6xl" }}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
+import Head from "next/head";
 
 import { ethers } from "ethers";
 import { web3 } from "../utils/web3Utils";
@@ -94,6 +95,7 @@ function Component() {
   const [currency, setCurrency] = useState("ETH");
   const [currencyIcon, setCurrencyIcon] = useState("FaEthereum");
   const [currentProivder, setCurrentProvider] = useState("0");
+  const [title, setTitle] = useState("paymeser");
 
   const numberChangeHandler = (number) => {
     // do nothing for decimal point if there already is one
@@ -280,6 +282,19 @@ function Component() {
     }
   }, [router]);
 
+  useEffect(() => {
+    if (user) {
+      if (user.serTag !== undefined) {
+        setTitle(`${user.serTag} | paymeser`);
+        return;
+      }
+      if (user.displayName !== undefined) {
+        setTitle(`${user.displayName} | paymeser`);
+        return;
+      }
+    }
+  }, [user]);
+
   if ((notFound && !ens) || errorMessage !== "") {
     return (
       <VStack pt={40} h="100vh">
@@ -304,6 +319,9 @@ function Component() {
 
   return (
     <Box bg="white" h="100vh" textColor="white">
+      <Head>
+        <title>{title}</title>
+      </Head>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
