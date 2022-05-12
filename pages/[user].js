@@ -458,10 +458,12 @@ function Component() {
                     onChange={(e) => setDisplayValue(e.target.value)}
                   />
                   <Box
+                    p={0}
                     as="button"
                     px={2}
-                    h="full"
-                    rounded="md"
+                    h="10"
+                    rounded={0}
+                    roundedEnd="md"
                     textColor="black"
                     _hover={{ bg: "#ebedf0" }}
                     onClick={() => currencySelectionHandler()}
@@ -473,9 +475,9 @@ function Component() {
                 <VStack pt={2} spacing={0}>
                   <SimpleGrid
                     w="full"
-                    spacingX={4}
+                    spacingX={0}
                     rounded={0}
-                    mb={4}
+                    mb={6}
                     columns={3}
                   >
                     {numbers.map((number) => (
@@ -504,6 +506,7 @@ function Component() {
                       textColor="black"
                       bg="none"
                       // m={2}
+                      onClick={() => numberChangeHandler("<")}
                       _hover={{ bg: "#ebedf0" }}
                     >
                       <BackIcon />
