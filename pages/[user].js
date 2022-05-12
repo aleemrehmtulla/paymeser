@@ -34,7 +34,7 @@ import * as Icons from "react-icons/fa";
 
 function Component() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "<"];
+  const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"];
   const router = useRouter();
   const [notFound, setNotFound] = useState(false);
   const [ens, setENS] = useState(false);
@@ -436,57 +436,89 @@ function Component() {
                   {user?.description}
                 </Text>
               </VStack>
-              <Box bg="blue"></Box>
 
-              <HStack rounded="md" border="1px" w="fit" borderColor="gray.300">
-                <Box pl={"2"}>
-                  <CustomIcon size="xs" name={currencyIcon} />
-                </Box>
-                <Input
-                  p={0}
-                  textColor="black"
-                  border={0}
-                  _focus={{ border: 0 }}
-                  value={displayValue}
-                  onChange={(e) => setDisplayValue(e.target.value)}
-                />
-                <Box
-                  as="button"
-                  px={2}
-                  h="full"
+              <Box align="center">
+                <HStack
+                  w="fit"
+                  mx={8}
                   rounded="md"
-                  textColor="black"
-                  _hover={{ bg: "#ebedf0" }}
-                  onClick={() => currencySelectionHandler()}
+                  border="1px"
+                  borderColor="gray.300"
                 >
-                  {currency}
-                </Box>
-              </HStack>
+                  <Box pl={"2"}>
+                    <CustomIcon size="xs" name={currencyIcon} />
+                  </Box>
+                  <Input
+                    p={0}
+                    w="fit"
+                    textColor="black"
+                    border={0}
+                    _focus={{ border: 0 }}
+                    value={displayValue}
+                    onChange={(e) => setDisplayValue(e.target.value)}
+                  />
+                  <Box
+                    as="button"
+                    px={2}
+                    h="full"
+                    rounded="md"
+                    textColor="black"
+                    _hover={{ bg: "#ebedf0" }}
+                    onClick={() => currencySelectionHandler()}
+                  >
+                    {currency}
+                  </Box>
+                </HStack>
 
-              <VStack spacing={0}>
-                <SimpleGrid rounded="md" p={4} spacing={2} mb={4} columns={3}>
-                  {numbers.map((number) => (
+                <VStack pt={2} spacing={0}>
+                  <SimpleGrid
+                    w="full"
+                    spacingX={4}
+                    rounded={0}
+                    mb={4}
+                    columns={3}
+                  >
+                    {numbers.map((number) => (
+                      <Button
+                        onClick={() => numberChangeHandler(number)}
+                        fontSize="xl"
+                        rounded={4}
+                        w="full"
+                        py={8}
+                        textColor="black"
+                        key={number}
+                        bg="none"
+                        // m={2}
+                        _hover={{ bg: "#ebedf0" }}
+                      >
+                        {number}
+                      </Button>
+                    ))}
+
                     <Button
-                      onClick={() => numberChangeHandler(number)}
                       size="lg"
-                      py={4}
+                      rounded={4}
+                      w="full"
+                      py={8}
+                      // border={"1px"}
                       textColor="black"
-                      key={number}
-                      bg="gray.100"
-                      _hover={{ bg: "gray.300" }}
+                      bg="none"
+                      // m={2}
+                      _hover={{ bg: "#ebedf0" }}
                     >
-                      {number}
+                      <BackIcon />
                     </Button>
-                  ))}
-                </SimpleGrid>
-                <Button
-                  bg="gray.100"
-                  textColor="black"
-                  onClick={sendMoneyHandler}
-                >
-                  Send Money!
-                </Button>
-              </VStack>
+                  </SimpleGrid>
+
+                  <Button
+                    bg="gray.100"
+                    textColor="black"
+                    onClick={sendMoneyHandler}
+                  >
+                    Send Money!
+                  </Button>
+                </VStack>
+              </Box>
             </Box>
           </Center>
         </VStack>
@@ -505,4 +537,8 @@ const CustomIcon = ({ name }) => {
   }
 
   return <IconComponent color="black" size="1rem" />;
+};
+const BackIcon = () => {
+  const IconComponent = Icons["FaBackspace"];
+  return <IconComponent color="black" size="1.5rem" />;
 };
