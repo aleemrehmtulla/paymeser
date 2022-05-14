@@ -459,6 +459,7 @@ function Component() {
                   />
                   <Box
                     p={0}
+                    w={16}
                     as="button"
                     px={2}
                     h="10"
