@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 import Head from "next/head";
+import WalletConnectProvider from "@walletconnect/ethereum-provider";
 
 import { ethers } from "ethers";
 import { web3 } from "../utils/web3Utils";
@@ -198,7 +199,7 @@ function Component() {
     const provider = new WalletConnectProvider({
       infuraId: "2d8110a2cee347a0b1056ce46d7387b1", // Required
     });
-    const web3 = new Web3(provider);
+    // const web3 = new Web3(provider);
     const formattedAmount = ethers.utils.parseEther(amount);
 
     await provider.enable();
